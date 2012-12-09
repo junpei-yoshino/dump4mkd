@@ -4,7 +4,6 @@
 #include <stdlib.h> 
 #include <signal.h>
 
-#define MAXBYTES2CAPTURE 2048 
 pcap_t *descr = NULL; 
 pcap_dumper_t *dumper = NULL;
 static void cleanup(int);
@@ -27,8 +26,8 @@ int main(int argc, char *argv[]){
  };
  context = poptGetContext(NULL, argc, (const char **) argv, optionsTable, 0);
  poptSetOtherOptionHelp(context, "<tcpdump filter>");
- while ((c = poptGetNextOpt(context)) >= 0) {}
- filter = (char *)malloc(512);
+ while (poptGetNextOpt(context) >= 0) {}
+ filter = (char *)malloc(256);
  strcpy (filter,"");
  while ((tmp = poptGetArg(context))!=NULL) {
    if (strcmp(filter,"")) filter = strcat(filter," ");
